@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@export var move_speed: float = 300.0
+@export var move_speed: float = 200.0
 @export var jump_velocity: float = -400.0
 @export var gravity: float = 980.0
 @export var air_friction: float = 0.8
@@ -9,6 +9,9 @@ extends CharacterBody2D
 @export var fast_fall_gravity_multiplier: float = 2.0
 var is_dashing: bool = false
 var dash_timer: float = 10.0
+
+func _on_ready():
+	$texto_metal.visible = false
 
 func _physics_process(delta: float) -> void:
 	if is_dashing:
@@ -73,3 +76,15 @@ func push_away_from_mouse() -> void:
 #			animated_sprite.play("run")
 #		else:
 #			animated_sprite.play("idle")
+
+
+func _on_sensor_metales_body_entered(body: Node2D) -> void:
+	if body.is_in_group("metal"):
+		$texto_metal.text = "hay metales"
+		$texto_metal.visible = true
+		print("hay colision")
+
+func _on_sensor_metales_body_exited(body: Node2D) -> void:
+	if body.is_in_group("metal"):
+		$texto_metal.visible = false
+		print("ya no hay colision")

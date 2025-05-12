@@ -1,10 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://dmqbb6wammm5p"]
+[gd_scene load_steps=4 format=3 uid="uid://dmqbb6wammm5p"]
 
 [ext_resource type="Script" uid="uid://b54b4cnjaj5xm" path="res://Personaje/char_1.gd" id="1_ngd07"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mayg1"]
 radius = 15.0
 height = 60.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ngd07"]
+radius = 177.634
 
 [node name="Char1" type="CharacterBody2D"]
 collision_layer = 2
@@ -20,3 +23,22 @@ color = Color(0.533717, 0.725571, 0.778621, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_mayg1")
+
+[node name="sensor_metales" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 16
+
+[node name="collisionShape" type="CollisionShape2D" parent="sensor_metales"]
+shape = SubResource("CircleShape2D_ngd07")
+debug_color = Color(0.715089, 0.391002, 0.73449, 0.42)
+
+[node name="texto_metal" type="Label" parent="."]
+visible = false
+offset_left = -43.0
+offset_top = -67.0
+offset_right = 34.0
+offset_bottom = -44.0
+text = "hay metal"
+
+[connection signal="body_entered" from="sensor_metales" to="." method="_on_sensor_metales_body_entered"]
+[connection signal="body_exited" from="sensor_metales" to="." method="_on_sensor_metales_body_exited"]
