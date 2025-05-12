@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://bccfe1t8mykh4"]
+
+[ext_resource type="PackedScene" uid="uid://bl2qxipv3l7v2" path="res://assets/floor.tscn" id="1_cmli1"]
+[ext_resource type="PackedScene" uid="uid://dmqbb6wammm5p" path="res://Personaje/char1.tscn" id="2_dkwi6"]
+
+[node name="TestScene" type="Node2D"]
+
+[node name="Floor" parent="." instance=ExtResource("1_cmli1")]
+position = Vector2(31, 618)
+
+[node name="Char1" parent="." instance=ExtResource("2_dkwi6")]
+position = Vector2(139, 538)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(418, 397)
