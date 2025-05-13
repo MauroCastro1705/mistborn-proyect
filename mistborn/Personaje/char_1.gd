@@ -7,12 +7,13 @@ extends CharacterBody2D
 @export var dash_force: float = 600.0 # Fuerza del impulso
 @export var dash_duration: float = 0.3 # Duración del impulso en segundos
 @export var fast_fall_gravity_multiplier: float = 2.0
+var can_dash:bool = false
 var is_dashing: bool = false
 var dash_timer: float = 10.0
-
+var new_direction = 0
 func _on_ready():
 	$texto_metal.visible = false
-
+	var new_direction = $Char1.global_position()
 func _physics_process(delta: float) -> void:
 	if is_dashing:
 		dash_timer += delta
@@ -50,18 +51,20 @@ func _physics_process(delta: float) -> void:
 
 #FUNCION DE PULL
 func pull_towards_mouse() -> void:
-	var mouse_position: Vector2 = get_global_mouse_position()
-	var direction: Vector2 = (mouse_position - global_position).normalized()
-	velocity = direction * dash_force
-	is_dashing = true
-	dash_timer = 0.0
+	#var mouse_position: Vector2 = get_global_mouse_position()
+	#var direction: Vector2 = (mouse_position - global_position).normalized()
+	if can_dash:
+		var direction: Vector2 = (new_direction - global_position).normalized()
+		velocity = direction * dash_force
+		is_dashing = true
+		dash_timer = 0.0
 	#FUNCION DE PUSH
 func push_away_from_mouse() -> void:
-	var mouse_position: Vector2 = get_global_mouse_position()
-	var direction: Vector2 = (global_position - mouse_position).normalized() # Invertimos la resta
-	velocity = direction * dash_force
-	is_dashing = true
-	dash_timer = 0.0
+	if can_dash:
+		var direction: Vector2 = (global_position - new_direction).normalized() # Invertimos la resta
+		velocity = direction * dash_force
+		is_dashing = true
+		dash_timer = 0.0
 
 
 	# Opcional: Animaciones
@@ -79,12 +82,16 @@ func push_away_from_mouse() -> void:
 
 
 func _on_sensor_metales_body_entered(body: Node2D) -> void:
-	if body.is_in_group("metal"):
-		$texto_metal.text = "hay metales"
-		$texto_metal.visible = true
-		print("hay colision")
+	can_dash = true
+	$texto_metal.text = "hay metales"
+	$texto_metal.visible = true
+	print("hay colision")
+	print(body.global_position)
+	new_direction = body.global_position
+		
 
 func _on_sensor_metales_body_exited(body: Node2D) -> void:
-	if body.is_in_group("metal"):
-		$texto_metal.visible = false
-		print("ya no hay colision")
+	can_dash = false
+	$texto_metal.visible = false
+	print("ya no hay colision")
+	new_direction = 0
