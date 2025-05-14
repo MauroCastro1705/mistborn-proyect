@@ -35,6 +35,7 @@ enabled=PackedStringArray("res://addons/Todo_Manager/plugin.cfg", "res://addons/
 [global_group]
 
 metal=""
+player=""
 
 [input]
 

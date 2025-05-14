@@ -3,68 +3,92 @@ extends CharacterBody2D
 @export var move_speed: float = 200.0
 @export var jump_velocity: float = -400.0
 @export var gravity: float = 980.0
-@export var air_friction: float = 0.8
-@export var dash_force: float = 600.0 # Fuerza del impulso
-@export var dash_duration: float = 0.3 # Duración del impulso en segundos
-@export var fast_fall_gravity_multiplier: float = 2.0
+@export var fast_fall_multiplier: float = 2.0
+var max_fall_speed : float = 500.0
+var acceleration: float = 10.0
+#DASH
+@export var dash_force: float = 900.0 # Fuerza del impulso
+var metal_body: Node2D = null
 var can_dash:bool = false
 var is_dashing: bool = false
-var dash_timer: float = 10.0
-var new_direction = 0
+var target_velocity = Vector2.ZERO
+#LI
+@onready var line = $Line2D
+@onready var player = get_tree().get_nodes_in_group("player")[0]
+var metal_position: Vector2 = Vector2.ZERO # Almacena la posición del metal
+
+
 func _on_ready():
 	$texto_metal.visible = false
-	var new_direction = $Char1.global_position()
+	
 func _physics_process(delta: float) -> void:
-	if is_dashing:
-		dash_timer += delta
-		if dash_timer >= dash_duration:
-			is_dashing = false
-			velocity *= air_friction # Aplicar un poco de fricción al final del dash
-		move_and_slide()
-		return # No procesar movimiento normal durante el dash
-
-	# Aplicar gravedad (con caída rápida)
-	if not is_on_floor():
-		if velocity.y > 0: # Si está cayendo
-			velocity.y += gravity * fast_fall_gravity_multiplier * delta
-		else: # Si está subiendo o en el aire inicialmente
-			velocity.y += gravity * delta
-		velocity.x *= air_friction
+	# Entrada horizontal
+	var input_direction := Input.get_axis("left", "right")
+	velocity.x = input_direction * move_speed
+	# Salto
+	if is_on_floor():
+		if Input.is_action_just_pressed("jump"):
+			velocity.y = jump_velocity
 	else:
-		velocity.y = 0
-	# Capturar entrada horizontal
-	var direction: float = Input.get_axis("left", "right")
-	velocity.x = direction * move_speed
-	# Saltar
-	if is_on_floor() and Input.is_action_just_pressed("jump"):
-		velocity.y = jump_velocity
+		if velocity.y > 0:  # Está cayendo
+			velocity.y += gravity * fast_fall_multiplier * delta
+		else:
+			velocity.y += gravity * delta
+	 # Limitar velocidad máxima de caída
+		velocity.y = min(velocity.y, max_fall_speed)
 
-	# ---PULL----
-	if Input.is_action_just_pressed("pull"): # Asume que tienes una acción "dash" configurada
-		pull_towards_mouse()
-	#---PUSH----
-	if Input.is_action_just_pressed("push"): # Usa la nueva acción aquí
-		push_away_from_mouse()
-		
-	# Mover el personaje
 	move_and_slide()
+	# Pull y Push
+	if Input.is_action_just_pressed("pull"): 
+		pull_towards_metal()
+	if Input.is_action_just_pressed("push"):
+		push_away_from_metal()
+	#dibuja lineas de metales
+	if is_instance_valid(metal_body):
+		var start_pos = Vector2.ZERO  # Posición local del jugador
+		var end_pos = to_local(metal_body.global_position)  # Convertimos posición global a local
+		line.points = [start_pos, end_pos]
+	else:
+		line.clear_points()
+
+
+
+func _on_sensor_metales_body_entered(body: Node2D) -> void:
+	if body.is_in_group("metal"):
+		can_dash = true
+		metal_body = body
+		if $texto_metal:
+			$texto_metal.text = "hay metales"
+			$texto_metal.visible = true
+		print("hay colision con metal en:", body.global_position)
+		line.visible = true
+
+func _on_sensor_metales_body_exited(body: Node2D) -> void:
+	if body == metal_body:
+		metal_body = null  # Se fue el metal detectado
+		can_dash = false
+		if $texto_metal:
+			$texto_metal.visible = false
+		line.visible = false
+		line.clear_points()
 
 #FUNCION DE PULL
-func pull_towards_mouse() -> void:
-	#var mouse_position: Vector2 = get_global_mouse_position()
-	#var direction: Vector2 = (mouse_position - global_position).normalized()
-	if can_dash:
-		var direction: Vector2 = (new_direction - global_position).normalized()
+func pull_towards_metal() -> void:
+	if can_dash and metal_body.global_position != Vector2.ZERO:
+		var direction: Vector2 = (metal_body.global_position - global_position).normalized()
+		direction.y *= 0.5
+		direction.x *= 25.5
 		velocity = direction * dash_force
 		is_dashing = true
-		dash_timer = 0.0
-	#FUNCION DE PUSH
-func push_away_from_mouse() -> void:
-	if can_dash:
-		var direction: Vector2 = (global_position - new_direction).normalized() # Invertimos la resta
+		
+
+func push_away_from_metal() -> void:
+	if can_dash and metal_body.global_position != Vector2.ZERO:
+		var direction: Vector2 = (global_position - metal_body.global_position).normalized()
+		direction.y *= 0.5
+		direction.x *= 25.5
 		velocity = direction * dash_force
 		is_dashing = true
-		dash_timer = 0.0
 
 
 	# Opcional: Animaciones
@@ -79,19 +103,3 @@ func push_away_from_mouse() -> void:
 #			animated_sprite.play("run")
 #		else:
 #			animated_sprite.play("idle")
-
-
-func _on_sensor_metales_body_entered(body: Node2D) -> void:
-	can_dash = true
-	$texto_metal.text = "hay metales"
-	$texto_metal.visible = true
-	print("hay colision")
-	print(body.global_position)
-	new_direction = body.global_position
-		
-
-func _on_sensor_metales_body_exited(body: Node2D) -> void:
-	can_dash = false
-	$texto_metal.visible = false
-	print("ya no hay colision")
-	new_direction = 0

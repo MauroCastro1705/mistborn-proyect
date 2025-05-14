@@ -2,17 +2,21 @@
 
 [ext_resource type="Script" uid="uid://b54b4cnjaj5xm" path="res://Personaje/char_1.gd" id="1_ngd07"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_ngd07"]
-radius = 177.634
-
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mayg1"]
 radius = 15.0
 height = 60.0
 
-[node name="Char1" type="CharacterBody2D"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_ngd07"]
+radius = 283.044
+
+[node name="Char1" type="CharacterBody2D" groups=["player"]]
 collision_layer = 2
 collision_mask = 3
+floor_block_on_wall = false
 script = ExtResource("1_ngd07")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_mayg1")
 
 [node name="sensor_metales" type="Area2D" parent="."]
 collision_layer = 0
@@ -29,9 +33,6 @@ offset_right = 15.0
 offset_bottom = 30.0
 color = Color(0.533717, 0.725571, 0.778621, 1)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_mayg1")
-
 [node name="texto_metal" type="Label" parent="."]
 visible = false
 offset_left = -43.0
@@ -39,6 +40,14 @@ offset_top = -67.0
 offset_right = 34.0
 offset_bottom = -44.0
 text = "hay metal"
+
+[node name="Line2D" type="Line2D" parent="."]
+visible = false
+z_index = 100
+points = PackedVector2Array(0, 0)
+width = 1.0
+default_color = Color(4.62055e-06, 0.610556, 0.970053, 1)
+antialiased = true
 
 [connection signal="body_entered" from="sensor_metales" to="." method="_on_sensor_metales_body_entered"]
 [connection signal="body_exited" from="sensor_metales" to="." method="_on_sensor_metales_body_exited"]

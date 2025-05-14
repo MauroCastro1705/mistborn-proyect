@@ -6,14 +6,25 @@
 
 [node name="TestScene" type="Node2D"]
 
+[node name="Floor3" parent="." instance=ExtResource("1_cmli1")]
+position = Vector2(656, 321)
+
 [node name="Floor" parent="." instance=ExtResource("1_cmli1")]
 position = Vector2(31, 618)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(615, 340)
 
 [node name="Char1" parent="." instance=ExtResource("2_dkwi6")]
 position = Vector2(139, 538)
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(418, 397)
-
 [node name="PilarMetal" parent="." instance=ExtResource("3_dkwi6")]
-position = Vector2(434, 476)
+position = Vector2(629, 329)
+rotation = -1.56291
+
+[node name="Floor2" parent="." instance=ExtResource("1_cmli1")]
+position = Vector2(715, 618)
+
+[node name="PilarMetal2" parent="." instance=ExtResource("3_dkwi6")]
+position = Vector2(1058, 458)
+rotation = -3.12583
