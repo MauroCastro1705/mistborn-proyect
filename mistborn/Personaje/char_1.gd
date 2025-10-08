@@ -12,15 +12,23 @@ extends CharacterBody2D
 @export var push_speed: float = 900.0
 @export var dash_time: float = 0.18            # duración del impulso
 @export var pull_stop_distance: float = 24.0   # distancia para cortar el pull al llegar
-
-var metal_body: Node2D = null
-var can_dash: bool = false
+@export var post_dash_cooldown: float = 0.18 
+@export var ground_accel: float = 3000.0
+@export var air_accel: float = 1500.0
+@export var friction: float = 2500.0
 
 # Estado de dash
 var is_dashing: bool = false
 var dash_dir: Vector2 = Vector2.ZERO
 var dash_speed: float = 0.0
 var dash_elapsed: float = 0.0
+var post_dash_timer: float = 0.0
+
+var metal_body: Node2D = null
+var can_dash: bool = false
+
+
+
 
 @onready var line: Line2D = $Line2D
 @onready var texto_metal: Label = $texto_metal
@@ -32,11 +40,11 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	if is_dashing:
-		# Movimiento exclusivo del dash (sin input ni gravedad)
+		# --- Movimiento exclusivo del dash ---
 		dash_elapsed += delta
 		velocity = dash_dir * dash_speed
 
-		# Si es PULL y ya estamos muy cerca del metal, cortar
+		# Si es PULL y ya estamos muy cerca del metal → cortar
 		if is_instance_valid(metal_body) and dash_speed == pull_speed:
 			var dist := global_position.distance_to(metal_body.global_position)
 			if dist <= pull_stop_distance:
@@ -45,29 +53,50 @@ func _physics_process(delta: float) -> void:
 		# Cortar por tiempo
 		if dash_elapsed >= dash_time:
 			_stop_dash()
-	else:
-		# INPUT horizontal normal
-		var input_direction := Input.get_axis("left", "right")
-		velocity.x = input_direction * move_speed
 
-		# Salto + gravedad (con fast-fall)
+	else:
+		# --- Post dash: conservar inercia y dirección original ---
+		if post_dash_timer > 0.0:
+			post_dash_timer -= delta
+			# Sin input horizontal. Solo gravedad y rozamiento leve.
+			if is_on_floor():
+				velocity.x = move_toward(velocity.x, 0.0, friction * delta * 0.25)
+
+		else:
+			# Movimiento normal con aceleración progresiva
+			var input_direction := Input.get_axis("left", "right")
+			var target_speed := input_direction * move_speed
+
+			var accel: float
+			if is_on_floor():
+				accel = ground_accel
+			else:
+				accel = air_accel
+
+			velocity.x = move_toward(velocity.x, target_speed, accel * delta)
+
+			# Disparadores pull/push
+			if Input.is_action_just_pressed("pull"):
+				_start_pull()
+			elif Input.is_action_just_pressed("push"):
+				_start_push()
+
+		# --- Gravedad y salto ---
 		if is_on_floor():
-			if Input.is_action_just_pressed("jump"):
+			if post_dash_timer <= 0.0 and Input.is_action_just_pressed("jump"):
 				velocity.y = jump_velocity
+			elif post_dash_timer > 0.0:
+				velocity.x = move_toward(velocity.x, 0.0, friction * delta * 0.25)
 		else:
 			if velocity.y > 0.0:
 				velocity.y += gravity * fast_fall_multiplier * delta
 			else:
 				velocity.y += gravity * delta
-			velocity.y = min(velocity.y, max_fall_speed)
 
-		# Disparadores pull/push
-		if Input.is_action_just_pressed("pull"):
-			_start_pull()
-		elif Input.is_action_just_pressed("push"):
-			_start_push()
+			if velocity.y > max_fall_speed:
+				velocity.y = max_fall_speed
 
-	# Dibujo de línea al metal (localizar a coords locales del jugador)
+	# --- Línea al metal ---
 	if is_instance_valid(metal_body) and can_dash:
 		line.visible = true
 		line.points = [Vector2.ZERO, to_local(metal_body.global_position)]
@@ -95,13 +124,14 @@ func _begin_dash(dir: Vector2, speed: float) -> void:
 	dash_dir = dir
 	dash_speed = speed
 	dash_elapsed = 0.0
+	# Opcional: cancelá componente vertical previa para que el dash sea más “limpio”
+	velocity.y = 0.0
 
 func _stop_dash() -> void:
 	is_dashing = false
-	dash_dir = Vector2.ZERO
-	dash_speed = 0.0
-	# opcional: conservar algo de inercia horizontal o frenarlo
-	# velocity *= 0.5
+	# IMPORTANTE: NO reseteamos velocity ni dirección.
+	# Conservamos exactamente la velocidad final del dash.
+	post_dash_timer = post_dash_cooldown
 
 # Señales del sensor de metales (Area2D)
 func _on_sensor_metales_body_entered(body: Node2D) -> void:

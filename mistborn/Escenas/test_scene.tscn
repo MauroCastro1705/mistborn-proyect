@@ -8,6 +8,7 @@
 
 [node name="Floor3" parent="." instance=ExtResource("1_cmli1")]
 position = Vector2(656, 321)
+scale = Vector2(3, 1)
 
 [node name="Floor" parent="." instance=ExtResource("1_cmli1")]
 position = Vector2(31, 618)
@@ -28,12 +29,10 @@ rotation = -3.12583
 
 [node name="PilarMetal3" parent="." instance=ExtResource("3_dkwi6")]
 position = Vector2(843, 27)
-rotation = -3.12583
+rotation = -6.28318
 
 [node name="PilarMetal4" parent="." instance=ExtResource("3_dkwi6")]
-position = Vector2(1096, 27)
-rotation = -3.12583
+position = Vector2(1231, 27)
 
 [node name="PilarMetal5" parent="." instance=ExtResource("3_dkwi6")]
-position = Vector2(1394, 27)
-rotation = -3.12583
+position = Vector2(1692, 27)
