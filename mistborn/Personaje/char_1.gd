@@ -27,7 +27,10 @@ var post_dash_timer: float = 0.0
 var metal_body: Node2D = null
 var can_dash: bool = false
 
-
+@onready var sensor_metales: Area2D = $sensor_metales
+@onready var sensor_metales_shape: CollisionShape2D = $sensor_metales/collisionShape
+@export var mostrar_sensor_debug: bool = true
+var color_sensor: Color = Color(0.2, 0.6, 1.0, 0.3) # azul transparente
 
 
 @onready var line: Line2D = $Line2D
@@ -37,7 +40,11 @@ func _ready() -> void:
 	texto_metal.visible = false
 	line.visible = false
 	line.clear_points()
-
+	
+func _process(_delta: float) -> void:
+	if mostrar_sensor_debug:
+		queue_redraw()
+		
 func _physics_process(delta: float) -> void:
 	if is_dashing:
 		# --- Movimiento exclusivo del dash ---
@@ -152,6 +159,25 @@ func _on_sensor_metales_body_exited(body: Node2D) -> void:
 			texto_metal.visible = false
 		line.visible = false
 		line.clear_points()
+
+func _draw() -> void:
+	if not mostrar_sensor_debug:
+		return
+
+	if is_instance_valid(sensor_metales_shape) and sensor_metales_shape.shape is CircleShape2D:
+		var circle: CircleShape2D = sensor_metales_shape.shape
+		var radius: float = circle.radius
+
+		var offset: Vector2 = sensor_metales.position
+		draw_arc(offset, radius, 0.0, TAU, 64, Color(0.2, 0.6, 1.0, 0.1), 2.0)
+
+
+
+
+
+
+
+
 
 
 
