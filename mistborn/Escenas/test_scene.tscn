@@ -25,3 +25,15 @@ position = Vector2(715, 618)
 [node name="PilarMetal2" parent="." instance=ExtResource("3_dkwi6")]
 position = Vector2(866, 455)
 rotation = -3.12583
+
+[node name="PilarMetal3" parent="." instance=ExtResource("3_dkwi6")]
+position = Vector2(843, 27)
+rotation = -3.12583
+
+[node name="PilarMetal4" parent="." instance=ExtResource("3_dkwi6")]
+position = Vector2(1096, 27)
+rotation = -3.12583
+
+[node name="PilarMetal5" parent="." instance=ExtResource("3_dkwi6")]
+position = Vector2(1394, 27)
+rotation = -3.12583
