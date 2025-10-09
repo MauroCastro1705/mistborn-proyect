@@ -25,7 +25,7 @@ offset_right = 13.0
 offset_bottom = 1.0
 color = Color(0.109597, 0.190463, 0.255063, 1)
 
-[node name="metal" type="StaticBody2D" parent="." groups=["metal"]]
+[node name="metal" type="StaticBody2D" parent="." groups=["metal", "pesado"]]
 position = Vector2(0, -15)
 collision_layer = 16
 collision_mask = 16

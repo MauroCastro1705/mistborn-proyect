@@ -1,38 +1,45 @@
-[gd_scene load_steps=4 format=3 uid="uid://bccfe1t8mykh4"]
+[gd_scene load_steps=5 format=3 uid="uid://bccfe1t8mykh4"]
 
 [ext_resource type="PackedScene" uid="uid://bl2qxipv3l7v2" path="res://assets/floor.tscn" id="1_cmli1"]
 [ext_resource type="PackedScene" uid="uid://dmqbb6wammm5p" path="res://Personaje/char1.tscn" id="2_dkwi6"]
 [ext_resource type="PackedScene" uid="uid://pfkm6c5fq3hs" path="res://assets/pilar_metal.tscn" id="3_dkwi6"]
+[ext_resource type="PackedScene" uid="uid://ckct4r6d3ea2e" path="res://Objetos/caja/caja_metal.tscn" id="4_pe8qq"]
 
 [node name="TestScene" type="Node2D"]
 
 [node name="Floor3" parent="." instance=ExtResource("1_cmli1")]
-position = Vector2(656, 321)
+position = Vector2(1377, 321)
 scale = Vector2(3, 1)
 
 [node name="Floor" parent="." instance=ExtResource("1_cmli1")]
 position = Vector2(31, 618)
 
+[node name="Floor4" parent="." instance=ExtResource("1_cmli1")]
+position = Vector2(493, 514)
+
 [node name="Char1" parent="." instance=ExtResource("2_dkwi6")]
 position = Vector2(139, 538)
 
 [node name="PilarMetal" parent="." instance=ExtResource("3_dkwi6")]
-position = Vector2(629, 329)
+position = Vector2(1350, 329)
 rotation = -1.56291
 
 [node name="Floor2" parent="." instance=ExtResource("1_cmli1")]
 position = Vector2(715, 618)
 
 [node name="PilarMetal2" parent="." instance=ExtResource("3_dkwi6")]
-position = Vector2(866, 455)
+position = Vector2(1587, 455)
 rotation = -3.12583
 
 [node name="PilarMetal3" parent="." instance=ExtResource("3_dkwi6")]
-position = Vector2(843, 27)
+position = Vector2(1564, 27)
 rotation = -6.28318
 
 [node name="PilarMetal4" parent="." instance=ExtResource("3_dkwi6")]
-position = Vector2(1231, 27)
+position = Vector2(1952, 27)
 
 [node name="PilarMetal5" parent="." instance=ExtResource("3_dkwi6")]
-position = Vector2(1692, 27)
+position = Vector2(2413, 27)
+
+[node name="CajaMetal" parent="." instance=ExtResource("4_pe8qq")]
+position = Vector2(509, 484)
