@@ -30,7 +30,7 @@ var can_dash: bool = false
 var can_push_box:bool = false
 var es_liviano:bool = false
 var es_pesado:bool = false
-var push_box_force:float = 500
+var push_box_force:float = 1000
 
 @onready var sensor_metales: Area2D = $sensor_metales
 @onready var sensor_metales_shape: CollisionShape2D = $sensor_metales/collisionShape
@@ -162,6 +162,7 @@ func _on_sensor_metales_body_entered(body: Node2D) -> void:
 			print("es pesado" , body)
 	if body.is_in_group("cajas"):
 		_entro_caja(body)
+		body.sleeping = false
 		if body.is_in_group("liviano"):
 			es_liviano = true
 			print("es liviano" , body)
@@ -195,7 +196,7 @@ func _salio_metal(_body):
 func _entro_caja(body:RigidBody2D):
 	metal_box = body
 	can_push_box = true
-	print("entro caja - se puede empujar")
+	print("entro caja" , body.name)
 
 
 func _draw() -> void:
