@@ -274,12 +274,13 @@ default_color = Color(4.62055e-06, 0.610556, 0.970053, 1)
 antialiased = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(1.25, 1.25)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(5, -14)
 sprite_frames = SubResource("SpriteFrames_rlwmd")
 animation = &"run"
-frame_progress = 0.193069
+frame_progress = 0.616251
 metadata/_edit_lock_ = true
 
 [connection signal="body_entered" from="sensor_metales" to="." method="_on_sensor_metales_body_entered"]
