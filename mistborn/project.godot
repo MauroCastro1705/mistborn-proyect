@@ -76,3 +76,8 @@ push={
 
 disable_plugin_dialogues=true
 copy_path="res://"
+
+[physics]
+
+2d/run_on_separate_thread=true
+2d/physics_engine="GodotPhysics2D"

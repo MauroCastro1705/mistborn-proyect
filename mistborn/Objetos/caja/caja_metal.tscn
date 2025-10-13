@@ -7,6 +7,7 @@ size = Vector2(30, 28)
 collision_layer = 16
 collision_mask = 3
 sleeping = true
+continuous_cd = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_46goq")

@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=3 uid="uid://dh006cdgxexgy"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jlo1v"]
+
+[node name="metal" type="StaticBody2D" groups=["metal", "pesado"]]
+collision_layer = 16
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["metal"]]
+shape = SubResource("CircleShape2D_jlo1v")
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+offset_left = -23.0
+offset_top = -23.0
+offset_right = 23.0
+offset_bottom = 23.0
+color = Color(0.558287, 0.558287, 0.558286, 1)
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+color = Color(0.258082, 0.258082, 0.258082, 1)

@@ -1,9 +1,9 @@
 [gd_scene load_steps=3 format=3 uid="uid://pfkm6c5fq3hs"]
 
+[ext_resource type="PackedScene" uid="uid://dh006cdgxexgy" path="res://Objetos/bloque_metal.tscn" id="1_6pumj"]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jlo1v"]
 size = Vector2(23, 160)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_jlo1v"]
 
 [node name="PilarMetal" type="StaticBody2D"]
 
@@ -25,11 +25,5 @@ offset_right = 13.0
 offset_bottom = 1.0
 color = Color(0.109597, 0.190463, 0.255063, 1)
 
-[node name="metal" type="StaticBody2D" parent="." groups=["metal", "pesado"]]
+[node name="metal" parent="." instance=ExtResource("1_6pumj")]
 position = Vector2(0, -15)
-collision_layer = 16
-collision_mask = 16
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="metal" groups=["metal"]]
-position = Vector2(1, -13)
-shape = SubResource("CircleShape2D_jlo1v")

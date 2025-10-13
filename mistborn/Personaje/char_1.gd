@@ -3,14 +3,13 @@ extends CharacterBody2D
 @export var move_speed: float = 200.0
 @export var jump_velocity: float = -400.0
 @export var gravity: float = 980.0
-@export var fast_fall_multiplier: float = 2.0
+@export var fast_fall_multiplier: float = 1.8
 @export var max_fall_speed: float = 500.0
-@export var acceleration: float = 10.0
 
 # "Dash" magnético
 @export var pull_speed: float = 900.0
 @export var push_speed: float = 900.0
-@export var dash_time: float = 0.18            # duración del impulso
+@export var dash_time: float = 0.18 # duración del impulso
 @export var pull_stop_distance: float = 24.0   # distancia para cortar el pull al llegar
 @export var post_dash_cooldown: float = 0.18 
 @export var ground_accel: float = 3000.0
@@ -40,6 +39,11 @@ var color_sensor: Color = Color(0.2, 0.6, 1.0, 0.3) # azul transparente
 
 @onready var line: Line2D = $Line2D
 @onready var texto_metal: Label = $texto_metal
+
+@onready var anim: AnimatedSprite2D = $AnimatedSprite2D
+@export var run_threshold: float = 12.0   # velocidad mínima en X para considerar "run"
+@export var use_flip_h: bool = true       # girar el sprite según dirección
+
 
 func _ready() -> void:
 	texto_metal.visible = false
@@ -115,9 +119,11 @@ func _physics_process(delta: float) -> void:
 	else:
 		line.visible = false
 		line.clear_points()
+		
 
 	move_and_slide()
-
+	var input_axis := Input.get_axis("left", "right")
+	_update_animation(input_axis)
 
 func _start_pull() -> void:
 	if not (can_dash and is_instance_valid(metal_body)):
@@ -210,25 +216,28 @@ func _draw() -> void:
 		var offset: Vector2 = sensor_metales.position
 		draw_arc(offset, radius, 0.0, TAU, 64, Color(0.2, 0.6, 1.0, 0.1), 2.0)
 
-
-
-
-
-
-
-
-
-
-
-	# Opcional: Animaciones
-#	var animated_sprite: AnimatedSprite2D = get_node_or_null("AnimatedSprite")
-#	if animated_sprite:
-#		if not is_on_floor():
-#			if velocity.y < 0:
-#				animated_sprite.play("jump")
-#			else:
-#				animated_sprite.play("fall")
-#		elif direction != 0:
-#			animated_sprite.play("run")
-#		else:
-#			animated_sprite.play("idle")
+func _update_animation(input_axis: float) -> void:
+	var target := ""
+	# Aire primero: decide por velocidad vertical
+	if not is_on_floor():
+		if velocity.y < 0.0:
+			target = "jump"
+		else:
+			target = "fall"
+	else:
+		# Piso: ¿se está moviendo en X?
+		if abs(velocity.x) > run_threshold or is_dashing:
+			target = "run"
+		else:
+			target = "idle"
+	# Evita reinicios constantes si ya está en esa anim
+	if anim.animation != target:
+		anim.play(target)
+	elif not anim.is_playing():
+		anim.play()
+	if use_flip_h:# Flip horizontal (opcional)
+		var dir := input_axis
+		if dir == 0.0 and abs(velocity.x) > 0.01:
+			dir = sign(velocity.x)
+		if dir != 0.0:
+			anim.flip_h = dir < 0.0
