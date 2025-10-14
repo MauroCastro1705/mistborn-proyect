@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+@onready var ui_controls: Control = $UiControls
+
 @export var move_speed: float = 200.0
 @export var jump_velocity: float = -400.0
 @export var gravity: float = 980.0
@@ -38,7 +40,7 @@ var color_sensor: Color = Color(0.2, 0.6, 1.0, 0.3) # azul transparente
 
 
 @onready var line: Line2D = $Line2D
-@onready var texto_metal: Label = $texto_metal
+
 
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 @export var run_threshold: float = 12.0   # velocidad mínima en X para considerar "run"
@@ -46,9 +48,9 @@ var color_sensor: Color = Color(0.2, 0.6, 1.0, 0.3) # azul transparente
 
 
 func _ready() -> void:
-	texto_metal.visible = false
 	line.visible = false
 	line.clear_points()
+	ui_controls.hide()
 	
 func _process(_delta: float) -> void:
 	if mostrar_sensor_debug:
@@ -161,6 +163,7 @@ func _stop_dash() -> void:
 
 # Señales del sensor de metales (Area2D)
 func _on_sensor_metales_body_entered(body: Node2D) -> void:
+	ui_controls.show()
 	if body.is_in_group("metal"):
 		_entro_metal(body)
 		if body.is_in_group("pesado"):
@@ -174,6 +177,7 @@ func _on_sensor_metales_body_entered(body: Node2D) -> void:
 			print("es liviano" , body)
 
 func _on_sensor_metales_body_exited(body: Node2D) -> void:
+	ui_controls.hide()
 	if body == metal_body:
 		_salio_metal(body)
 		if body.is_in_group("pesado"):
@@ -186,16 +190,11 @@ func _on_sensor_metales_body_exited(body: Node2D) -> void:
 func _entro_metal(body):
 	can_dash = true
 	metal_body = body
-	if texto_metal:
-		texto_metal.text = "hay metales"
-		texto_metal.visible = true
 	line.visible = true
 
 func _salio_metal(_body):
 	metal_body = null
 	can_dash = false
-	if texto_metal:
-		texto_metal.visible = false
 	line.visible = false
 	line.clear_points()
 
