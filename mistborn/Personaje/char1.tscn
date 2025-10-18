@@ -277,8 +277,8 @@ frame_progress = 0.616251
 metadata/_edit_lock_ = true
 
 [node name="UiControls" parent="." instance=ExtResource("7_sf0id")]
-offset_top = -4.0
-offset_bottom = -4.0
+offset_top = -44.0
+offset_bottom = -44.0
 
 [connection signal="body_entered" from="sensor_metales" to="." method="_on_sensor_metales_body_entered"]
 [connection signal="body_exited" from="sensor_metales" to="." method="_on_sensor_metales_body_exited"]

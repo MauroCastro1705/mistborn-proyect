@@ -1,0 +1,34 @@
+[gd_scene load_steps=2 format=3 uid="uid://ey0gxbksan8c"]
+
+[ext_resource type="Texture2D" uid="uid://m64rweciistn" path="res://assets/1x/1Recurso 1.png" id="1_a13bs"]
+
+[node name="fondo_paralax" type="Node2D"]
+
+[node name="Parallax2D2" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.2, 0.2)
+repeat_size = Vector2(3200, 0)
+repeat_times = 2
+
+[node name="1Recurso1" type="Sprite2D" parent="Parallax2D2"]
+modulate = Color(1, 1, 1, 0.701961)
+position = Vector2(2418, 210)
+scale = Vector2(2.62704, 2.72425)
+texture = ExtResource("1_a13bs")
+
+[node name="Parallax2D" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.5, 0.5)
+repeat_size = Vector2(3200, 0)
+repeat_times = 2
+
+[node name="1Recurso1" type="Sprite2D" parent="Parallax2D"]
+position = Vector2(1617, 157)
+scale = Vector2(2.23455, 2.23455)
+texture = ExtResource("1_a13bs")
+
+[node name="ColorRect" type="ColorRect" parent="Parallax2D"]
+offset_left = 210.0
+offset_top = 823.0
+offset_right = 3411.0
+offset_bottom = 1497.0
+color = Color(0.00180085, 0.000370448, 9.40054e-11, 1)
+metadata/_edit_lock_ = true
