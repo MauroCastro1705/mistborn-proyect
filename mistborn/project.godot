@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 SceneManager="*res://addons/scene_manager/SceneManager.tscn"
+Global="*res://scripts_generales/global.gd"
 
 [display]
 

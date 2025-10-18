@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://dmqbb6wammm5p"]
+[gd_scene load_steps=40 format=3 uid="uid://dmqbb6wammm5p"]
 
 [ext_resource type="Script" uid="uid://b54b4cnjaj5xm" path="res://Personaje/char_1.gd" id="1_ngd07"]
 [ext_resource type="Texture2D" uid="uid://cr8518k4du5qc" path="res://assets/character/120x80_PNGSheets/_Fall.png" id="2_wivtg"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://6kitapgyksma" path="res://assets/character/120x80_PNGSheets/_JumpFallInbetween.png" id="5_ghlw4"]
 [ext_resource type="Texture2D" uid="uid://cjkkd6xt4pak" path="res://assets/character/120x80_PNGSheets/_Run.png" id="6_vb5fy"]
 [ext_resource type="PackedScene" uid="uid://txoaewemsjrd" path="res://componentes/ui/ui_controls.tscn" id="7_sf0id"]
+[ext_resource type="PackedScene" uid="uid://b5fkmd48x1de7" path="res://componentes/score/score label.tscn" id="8_7xlo5"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mayg1"]
 radius = 9.0
@@ -279,6 +280,12 @@ metadata/_edit_lock_ = true
 [node name="UiControls" parent="." instance=ExtResource("7_sf0id")]
 offset_top = -44.0
 offset_bottom = -44.0
+
+[node name="ScoreLabel" parent="." instance=ExtResource("8_7xlo5")]
+offset_left = -313.0
+offset_top = -232.0
+offset_right = -313.0
+offset_bottom = -232.0
 
 [connection signal="body_entered" from="sensor_metales" to="." method="_on_sensor_metales_body_entered"]
 [connection signal="body_exited" from="sensor_metales" to="." method="_on_sensor_metales_body_exited"]
