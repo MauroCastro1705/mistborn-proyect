@@ -1,9 +1,46 @@
-[gd_scene load_steps=3 format=3 uid="uid://c80upf5ct8quv"]
+[gd_scene load_steps=6 format=3 uid="uid://c80upf5ct8quv"]
 
 [ext_resource type="Script" uid="uid://cqefs4w270ms" path="res://Objetos/pick_ups/pickup_1.gd" id="1_o4x51"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7vyii"]
 radius = 7.0
+
+[sub_resource type="Animation" id="Animation_o4x51"]
+resource_name = "new_animation"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Node2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.966667),
+"transitions": PackedFloat32Array(2.07053, 1),
+"update": 0,
+"values": [0.0, 6.28319]
+}
+
+[sub_resource type="Animation" id="Animation_vjydh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Node2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.383779]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_me5dg"]
+_data = {
+&"RESET": SubResource("Animation_vjydh"),
+&"new_animation": SubResource("Animation_o4x51")
+}
 
 [node name="Pickup1" type="Node2D"]
 script = ExtResource("1_o4x51")
@@ -15,11 +52,33 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_7vyii")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-offset_left = -6.0
-offset_top = -5.0
-offset_right = 6.0
-offset_bottom = 5.0
-color = Color(0.779302, 0.34519, 0.261093, 1)
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_me5dg")
+}
+autoplay = "new_animation"
+
+[node name="Node2D" type="Node2D" parent="."]
+rotation = 0.383779
+
+[node name="ColorRect" type="ColorRect" parent="Node2D"]
+offset_left = -6.39346
+offset_top = -5.02579
+offset_right = 5.60654
+offset_bottom = 4.97421
+rotation = 0.901218
+pivot_offset = Vector2(6.27049, 5.12035)
+color = Color(0.571848, 0.453602, 0.128439, 1)
+metadata/_edit_group_ = true
+
+[node name="ColorRect2" type="ColorRect" parent="Node2D"]
+offset_left = -5.05196
+offset_top = -6.5591
+offset_right = 6.94804
+offset_bottom = 3.4409
+rotation = 0.901218
+pivot_offset = Vector2(5.01511, 6.56755)
+color = Color(0.892452, 0.722832, 0.273554, 1)
+metadata/_edit_group_ = true
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

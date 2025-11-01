@@ -45,12 +45,15 @@ var color_sensor: Color = Color(0.2, 0.6, 1.0, 0.3) # azul transparente
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 @export var run_threshold: float = 12.0   # velocidad mínima en X para considerar "run"
 @export var use_flip_h: bool = true       # girar el sprite según dirección
+@onready var pick_up_efect: TextureRect = $pick_up_efect
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 
 func _ready() -> void:
 	line.visible = false
 	line.clear_points()
 	ui_controls.hide()
+	Global.score_update.connect(_flash_effect)
 	
 func _process(_delta: float) -> void:
 	if mostrar_sensor_debug:
@@ -240,3 +243,6 @@ func _update_animation(input_axis: float) -> void:
 			dir = sign(velocity.x)
 		if dir != 0.0:
 			anim.flip_h = dir < 0.0
+
+func _flash_effect():
+	animation_player.play("flash_effect")

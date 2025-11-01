@@ -97,4 +97,10 @@ polygon = PackedVector2Array(-313, 1031, 629, 850, 1233, 888, 1861, 1004, 2272, 
 [node name="Pickup1" parent="." instance=ExtResource("7_ev7wa")]
 position = Vector2(319, 539)
 
+[node name="Pickup2" parent="." instance=ExtResource("7_ev7wa")]
+position = Vector2(433, 505)
+
+[node name="Pickup3" parent="." instance=ExtResource("7_ev7wa")]
+position = Vector2(581, 506)
+
 [connection signal="body_entered" from="death-zone" to="." method="_on_area_2d_body_entered"]
