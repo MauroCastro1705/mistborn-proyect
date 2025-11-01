@@ -3,6 +3,8 @@ signal score_update
 signal level_restarted
 
 var player_score:int = 0
+var can_push:bool = false
+var can_pull:bool = true
 
 func _ready() -> void:
 	score_update.connect(_logica_score)

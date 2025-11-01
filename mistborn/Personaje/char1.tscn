@@ -320,7 +320,7 @@ zoom = Vector2(1.25, 1.25)
 position = Vector2(3, -14)
 sprite_frames = SubResource("SpriteFrames_rlwmd")
 animation = &"run"
-frame_progress = 0.616251
+frame_progress = 0.670513
 metadata/_edit_lock_ = true
 
 [node name="UiControls" parent="." instance=ExtResource("7_sf0id")]

@@ -1,5 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://txoaewemsjrd"]
+[gd_scene load_steps=6 format=3 uid="uid://txoaewemsjrd"]
 
+[ext_resource type="Script" uid="uid://dhafxiwwsd6d1" path="res://componentes/ui/ui_controls.gd" id="1_bga6w"]
 [ext_resource type="Texture2D" uid="uid://c4s3btga8ic5b" path="res://assets/ui inputs/Default/keyboard_e_outline.png" id="1_kf047"]
 [ext_resource type="Texture2D" uid="uid://886ihoq03pk7" path="res://assets/ui inputs/Default/keyboard_q_outline.png" id="2_jdupi"]
 [ext_resource type="FontFile" uid="uid://diwc5lumbgkvi" path="res://assets/fonts/BebasNeue-Regular.ttf" id="3_jdupi"]
@@ -16,31 +17,42 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_bga6w")
 
-[node name="KeyboardEOutline" type="Sprite2D" parent="."]
+[node name="push" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="KeyboardEOutline" type="Sprite2D" parent="push"]
 position = Vector2(34, 0.599998)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("1_kf047")
 
-[node name="KeyboardQOutline" type="Sprite2D" parent="."]
-position = Vector2(-37, -0.400001)
-scale = Vector2(0.3, 0.3)
-texture = ExtResource("2_jdupi")
-
-[node name="Label" type="Label" parent="."]
-layout_mode = 0
-offset_left = -50.0
-offset_top = 9.6
-offset_right = -25.0
-offset_bottom = 33.6
-text = "pull"
-label_settings = SubResource("LabelSettings_kf047")
-
-[node name="Label2" type="Label" parent="."]
+[node name="Label2" type="Label" parent="push"]
 layout_mode = 0
 offset_left = 21.0
 offset_top = 10.0
 offset_right = 48.0
 offset_bottom = 34.0
 text = "push"
+label_settings = SubResource("LabelSettings_kf047")
+
+[node name="pull" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="KeyboardQOutline" type="Sprite2D" parent="pull"]
+position = Vector2(-37, -0.400001)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_jdupi")
+
+[node name="Label" type="Label" parent="pull"]
+layout_mode = 0
+offset_left = -48.0
+offset_top = 10.0
+offset_right = -23.0
+offset_bottom = 34.0
+text = "pull"
 label_settings = SubResource("LabelSettings_kf047")

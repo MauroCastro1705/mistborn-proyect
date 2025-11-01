@@ -1,0 +1,9 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://ce83mgiteokxx"]
+
+[ext_resource type="FontFile" uid="uid://diwc5lumbgkvi" path="res://assets/fonts/BebasNeue-Regular.ttf" id="1_tcca4"]
+
+[resource]
+font = ExtResource("1_tcca4")
+font_size = 20
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)

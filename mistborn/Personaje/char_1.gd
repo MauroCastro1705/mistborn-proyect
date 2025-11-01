@@ -133,13 +133,14 @@ func _physics_process(delta: float) -> void:
 func _start_pull() -> void:
 	if not (can_dash and is_instance_valid(metal_body)):
 		return
-	var dir := (metal_body.global_position - global_position).normalized()
-	_begin_dash(dir, pull_speed)
+	if Global.can_pull:
+		var dir := (metal_body.global_position - global_position).normalized()
+		_begin_dash(dir, pull_speed)
 
 func _start_push() -> void:
 	if not (can_dash and is_instance_valid(metal_body)):
 		return
-	if can_dash and es_pesado:
+	if Global.can_push and can_dash and es_pesado:
 		var dir := (global_position - metal_body.global_position).normalized()
 		_begin_dash(dir, push_speed)
 	elif can_push_box and es_liviano and is_instance_valid(metal_box):
