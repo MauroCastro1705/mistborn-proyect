@@ -95,13 +95,13 @@ position = Vector2(1831, 148)
 position = Vector2(1936, -78)
 
 [node name="Pickup7" parent="pick_ups" instance=ExtResource("7_ev7wa")]
-position = Vector2(2700, -380)
+position = Vector2(2800, -404)
 
 [node name="Pickup8" parent="pick_ups" instance=ExtResource("7_ev7wa")]
-position = Vector2(3226, -455)
+position = Vector2(3326, -479)
 
 [node name="Pickup9" parent="pick_ups" instance=ExtResource("7_ev7wa")]
-position = Vector2(3688, -538)
+position = Vector2(3788, -562)
 
 [node name="Pickup10" parent="pick_ups" instance=ExtResource("7_ev7wa")]
 position = Vector2(4012, -718)

@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://m64rweciistn" path="res://assets/1x/1Recurso 1.png" id="1_a13bs"]
 
 [sub_resource type="Gradient" id="Gradient_a13bs"]
-offsets = PackedFloat32Array(0.233766, 0.649351, 0.980519)
+offsets = PackedFloat32Array(0.233766, 0.571429, 0.980519)
 colors = PackedColorArray(0.196078, 0.0352941, 0.403922, 0.231373, 0.576471, 0.576471, 0.576471, 0, 0.941176, 0.811765, 0.588235, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_vi2bj"]
@@ -17,14 +17,7 @@ fill_to = Vector2(0.53211, 1)
 offset_left = -3152.0
 offset_top = -2749.0
 offset_right = 8166.0
-offset_bottom = 668.0
-texture = SubResource("GradientTexture2D_vi2bj")
-
-[node name="TextureRect2" type="TextureRect" parent="."]
-offset_left = -3152.0
-offset_top = -2749.0
-offset_right = 8166.0
-offset_bottom = 668.0
+offset_bottom = 1389.0
 texture = SubResource("GradientTexture2D_vi2bj")
 
 [node name="Parallax2D2" type="Parallax2D" parent="."]
