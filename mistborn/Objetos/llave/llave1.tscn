@@ -1,0 +1,64 @@
+[gd_scene load_steps=7 format=3 uid="uid://cd08b0l5i72e8"]
+
+[ext_resource type="Script" uid="uid://bwsiuq3qy0txg" path="res://Objetos/llave/llave_1.gd" id="1_hwn7s"]
+[ext_resource type="Texture2D" uid="uid://c86l0nb7mkq0q" path="res://assets/basic-key.png" id="1_k4ekc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hwn7s"]
+size = Vector2(14, 36)
+
+[sub_resource type="Animation" id="Animation_ag3v1"]
+resource_name = "llave1"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Basic-key:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.99),
+"transitions": PackedFloat32Array(1, 0.466517, 5.46416),
+"update": 0,
+"values": [Vector2(-1, 0), Vector2(-1, -10), Vector2(-1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_s4ltb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Basic-key:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8pxgm"]
+_data = {
+&"RESET": SubResource("Animation_s4ltb"),
+&"llave1": SubResource("Animation_ag3v1")
+}
+
+[node name="Llave1" type="Area2D"]
+collision_mask = 3
+script = ExtResource("1_hwn7s")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 0)
+shape = SubResource("RectangleShape2D_hwn7s")
+
+[node name="Basic-key" type="Sprite2D" parent="."]
+position = Vector2(-1, 0)
+scale = Vector2(0.0712638, 0.0712638)
+texture = ExtResource("1_k4ekc")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_8pxgm")
+}
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

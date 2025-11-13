@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://bui7akuu45ous"]
+[gd_scene load_steps=11 format=4 uid="uid://bui7akuu45ous"]
 
 [ext_resource type="Script" uid="uid://dnv75spujgs1w" path="res://scripts_generales/basic_scene_controller.gd" id="1_cpjl3"]
 [ext_resource type="PackedScene" uid="uid://ey0gxbksan8c" path="res://Escenas/fondo_paralax.tscn" id="2_ev7wa"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://c80upf5ct8quv" path="res://Objetos/pick_ups/pickup1.tscn" id="7_ev7wa"]
 [ext_resource type="LabelSettings" uid="uid://ce83mgiteokxx" path="res://assets/themes/texto_basico.tres" id="8_xp713"]
 [ext_resource type="PackedScene" uid="uid://dgsrevkr6xian" path="res://componentes/win-zone/win-zone.tscn" id="9_e7ej2"]
+[ext_resource type="PackedScene" uid="uid://cd08b0l5i72e8" path="res://Objetos/llave/llave1.tscn" id="10_wubmf"]
 
 [node name="nivel 1 - area 1" type="Node2D"]
 script = ExtResource("1_cpjl3")
@@ -90,10 +91,6 @@ position = Vector2(581, 506)
 
 [node name="Pickup4" parent="pick_ups" instance=ExtResource("7_ev7wa")]
 position = Vector2(1526, 458)
-
-[node name="Pickup13" parent="pick_ups" instance=ExtResource("7_ev7wa")]
-position = Vector2(1909, 701)
-scale = Vector2(2, 2)
 
 [node name="Pickup5" parent="pick_ups" instance=ExtResource("7_ev7wa")]
 position = Vector2(1831, 148)
@@ -192,5 +189,8 @@ color = Color(1, 0, 1, 1)
 
 [node name="Win-zone" parent="." instance=ExtResource("9_e7ej2")]
 position = Vector2(4910, 303)
+
+[node name="Llave1" parent="." instance=ExtResource("10_wubmf")]
+position = Vector2(1926, 696)
 
 [connection signal="body_entered" from="death-zone" to="." method="_on_area_2d_body_entered"]
