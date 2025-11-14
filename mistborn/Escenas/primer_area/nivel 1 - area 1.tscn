@@ -46,6 +46,12 @@ position = Vector2(1320, 476)
 [node name="metal3" parent="metales" instance=ExtResource("5_wubmf")]
 position = Vector2(1768, 343)
 
+[node name="metal10" parent="metales" instance=ExtResource("5_wubmf")]
+position = Vector2(2166, 545)
+
+[node name="metal11" parent="metales" instance=ExtResource("5_wubmf")]
+position = Vector2(2176, 305)
+
 [node name="metal4" parent="metales" instance=ExtResource("5_wubmf")]
 position = Vector2(1855, 31)
 
@@ -192,5 +198,8 @@ position = Vector2(4910, 303)
 
 [node name="Llave1" parent="." instance=ExtResource("10_wubmf")]
 position = Vector2(1926, 696)
+
+[node name="Llave3" parent="." instance=ExtResource("10_wubmf")]
+position = Vector2(1966, 695)
 
 [connection signal="body_entered" from="death-zone" to="." method="_on_area_2d_body_entered"]

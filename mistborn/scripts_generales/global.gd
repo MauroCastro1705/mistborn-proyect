@@ -7,6 +7,13 @@ var player_score:int = 0
 var can_push:bool = false
 var can_pull:bool = true
 
+var key_1_id
+var key_2_id
+var key_3_id
+
+var keys_in_lvl_1:int = 2
+
+
 func _ready() -> void:
 	score_update.connect(_logica_score)
 	level_restarted.connect(_restart_level)
@@ -29,4 +36,5 @@ func _reset_values():
 
 func unlock_current_door():
 	pass
+	
 	
