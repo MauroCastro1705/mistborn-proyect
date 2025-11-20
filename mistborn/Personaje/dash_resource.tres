@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="DashStats" load_steps=2 format=3 uid="uid://d17pufvmak2l0"]
+
+[ext_resource type="Script" uid="uid://dqv0nlk4xm0qc" path="res://Personaje/dash_stats.gd" id="1_b8qnx"]
+
+[resource]
+script = ExtResource("1_b8qnx")
+metadata/_custom_type_script = "uid://dqv0nlk4xm0qc"

@@ -1,8 +1,10 @@
-[gd_scene load_steps=45 format=3 uid="uid://dmqbb6wammm5p"]
+[gd_scene load_steps=46 format=3 uid="uid://dmqbb6wammm5p"]
 
 [ext_resource type="Script" uid="uid://b54b4cnjaj5xm" path="res://Personaje/char_1.gd" id="1_ngd07"]
+[ext_resource type="Resource" uid="uid://d17pufvmak2l0" path="res://Personaje/dash_resource.tres" id="2_ghlw4"]
 [ext_resource type="Texture2D" uid="uid://cr8518k4du5qc" path="res://assets/character/120x80_PNGSheets/_Fall.png" id="2_wivtg"]
 [ext_resource type="Texture2D" uid="uid://bam24eio71ow6" path="res://assets/character/120x80_PNGSheets/_Idle.png" id="3_sf0id"]
+[ext_resource type="PackedScene" uid="uid://bki76vtooytev" path="res://sensor_metales.tscn" id="3_vb5fy"]
 [ext_resource type="Texture2D" uid="uid://dua8rxw4ty6r3" path="res://assets/character/120x80_PNGSheets/_Jump.png" id="4_7xlo5"]
 [ext_resource type="Texture2D" uid="uid://6kitapgyksma" path="res://assets/character/120x80_PNGSheets/_JumpFallInbetween.png" id="5_ghlw4"]
 [ext_resource type="Texture2D" uid="uid://cjkkd6xt4pak" path="res://assets/character/120x80_PNGSheets/_Run.png" id="6_vb5fy"]
@@ -12,9 +14,6 @@
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mayg1"]
 radius = 9.0
 height = 44.0
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_ngd07"]
-radius = 253.018
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_j8wre"]
 atlas = ExtResource("2_wivtg")
@@ -291,19 +290,14 @@ collision_layer = 2
 collision_mask = 3
 floor_block_on_wall = false
 script = ExtResource("1_ngd07")
+dash = ExtResource("2_ghlw4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 3)
 shape = SubResource("CapsuleShape2D_mayg1")
 
-[node name="sensor_metales" type="Area2D" parent="."]
-visible = false
-collision_layer = 0
-collision_mask = 16
-
-[node name="collisionShape" type="CollisionShape2D" parent="sensor_metales"]
-shape = SubResource("CircleShape2D_ngd07")
-debug_color = Color(0.715089, 0.391002, 0.73449, 0.42)
+[node name="sensor_metales" parent="." instance=ExtResource("3_vb5fy")]
+unique_name_in_owner = true
 
 [node name="Line2D" type="Line2D" parent="."]
 visible = false
