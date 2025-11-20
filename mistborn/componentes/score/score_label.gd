@@ -6,16 +6,14 @@ extends Control
 @onready var key: TextureRect = %key
 @onready var key_3: TextureRect = %key_3
 @onready var key_2: TextureRect = %key_2
-
+var key_escena = preload("res://Objetos/llave/llave1.tscn")
 var keys_in_this_level: Array = []
 
 
 func _ready() -> void:
 	Global.score_update.connect(_update_label)
-	Global.key_grabbed.connect(_activate_key)
 	_update_label()
 	get_keys_in_this_level()
-	what_keys_to_show()
 	turn_keys_to_black(keys_in_this_level)
 	animation_player.play("key_rotation")
 
@@ -46,6 +44,7 @@ func get_keys_in_this_level():
 		1: keys_in_this_level = [key]
 		2: keys_in_this_level = [key, key_2]
 		3: keys_in_this_level = [key, key_2, key_3]
+	what_keys_to_show()
 
 func what_keys_to_show():
 	var amount = keys_in_this_level.size()

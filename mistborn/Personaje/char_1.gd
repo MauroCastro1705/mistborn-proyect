@@ -43,13 +43,9 @@ func _physics_process(delta: float) -> void:
 		_frenar_dash_segun(delta)
 	else:
 		_hacer_dash_y_moverse(delta)
-		# --- Gravedad y salto ---
-		if is_on_floor():
-			salto_desde_el_piso(delta)
-		else:
-			caida_estando_en_aire(delta)
-	# --- Línea al metal ---
-	_update_line_drawn(metal_body)
+		handle_gravedad(delta)#Gravedad y salto
+		
+	_update_line_drawn(metal_body)# Línea al metal
 	move_and_slide()
 	var input_axis := Input.get_axis("left", "right")
 	_update_animation(input_axis)
@@ -61,6 +57,12 @@ func _update_line_drawn(a_metal_body):
 	else:
 		_clear_line_points()
 
+func handle_gravedad(delta):
+	# --- Gravedad y salto ---
+	if is_on_floor():
+		salto_desde_el_piso(delta)
+	else:
+		caida_estando_en_aire(delta)
 
 func salto_desde_el_piso(delta):
 	if dash.post_dash_timer <= 0.0 and Input.is_action_just_pressed("jump"):
