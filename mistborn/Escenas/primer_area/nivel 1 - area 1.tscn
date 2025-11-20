@@ -25,7 +25,6 @@ fill_to = Vector2(0.472934, 0.00854701)
 script = ExtResource("1_cpjl3")
 
 [node name="fondo_paralax" parent="." instance=ExtResource("2_ev7wa")]
-visible = false
 position = Vector2(2264, -108)
 
 [node name="TileLayer-principal" type="TileMapLayer" parent="."]
@@ -37,7 +36,6 @@ tile_set = ExtResource("3_xp713")
 position = Vector2(46, 556)
 
 [node name="ColorRect2" type="ColorRect" parent="Char1"]
-visible = false
 z_index = -1
 offset_left = -433.0
 offset_top = -323.0
