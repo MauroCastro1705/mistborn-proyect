@@ -18,6 +18,8 @@ colors = PackedColorArray(0, 0, 0, 1, 0.069, 0.069, 0.069, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_63yl8"]
 gradient = SubResource("Gradient_wubmf")
+width = 500
+height = 500
 fill_from = Vector2(0.547009, 1)
 fill_to = Vector2(0.472934, 0.00854701)
 
@@ -34,14 +36,6 @@ tile_set = ExtResource("3_xp713")
 
 [node name="Char1" parent="." instance=ExtResource("4_e7ej2")]
 position = Vector2(46, 556)
-
-[node name="ColorRect2" type="ColorRect" parent="Char1"]
-z_index = -1
-offset_left = -433.0
-offset_top = -323.0
-offset_right = 434.0
-offset_bottom = 353.0
-color = Color(0.0810928, 0.12827, 0.175909, 1)
 
 [node name="metales" type="Node2D" parent="."]
 
@@ -71,6 +65,9 @@ position = Vector2(3833, -683)
 
 [node name="metal12" parent="metales" instance=ExtResource("5_wubmf")]
 position = Vector2(4609, 327)
+
+[node name="metal13" parent="metales" instance=ExtResource("5_wubmf")]
+position = Vector2(4116, 26)
 
 [node name="metal7" parent="metales" instance=ExtResource("5_wubmf")]
 position = Vector2(3442, -618)
@@ -114,6 +111,12 @@ position = Vector2(1831, 148)
 [node name="Pickup6" parent="pick_ups" instance=ExtResource("7_ev7wa")]
 position = Vector2(1936, -78)
 
+[node name="Pickup20" parent="pick_ups" instance=ExtResource("7_ev7wa")]
+position = Vector2(2257, -364)
+
+[node name="Pickup21" parent="pick_ups" instance=ExtResource("7_ev7wa")]
+position = Vector2(2448, -428)
+
 [node name="Pickup7" parent="pick_ups" instance=ExtResource("7_ev7wa")]
 position = Vector2(2800, -404)
 
@@ -131,6 +134,27 @@ position = Vector2(4105, -702)
 
 [node name="Pickup12" parent="pick_ups" instance=ExtResource("7_ev7wa")]
 position = Vector2(4220, -666)
+
+[node name="Pickup13" parent="pick_ups" instance=ExtResource("7_ev7wa")]
+position = Vector2(4222, -484)
+
+[node name="Pickup14" parent="pick_ups" instance=ExtResource("7_ev7wa")]
+position = Vector2(4213, -382)
+
+[node name="Pickup15" parent="pick_ups" instance=ExtResource("7_ev7wa")]
+position = Vector2(4208, -298)
+
+[node name="Pickup16" parent="pick_ups" instance=ExtResource("7_ev7wa")]
+position = Vector2(4195, -196)
+
+[node name="Pickup18" parent="pick_ups" instance=ExtResource("7_ev7wa")]
+position = Vector2(4120, 142)
+
+[node name="Pickup19" parent="pick_ups" instance=ExtResource("7_ev7wa")]
+position = Vector2(4122, 293)
+
+[node name="Pickup17" parent="pick_ups" instance=ExtResource("7_ev7wa")]
+position = Vector2(4636, -47)
 
 [node name="tutorialers" type="Control" parent="."]
 layout_mode = 3
@@ -224,6 +248,7 @@ offset_right = 11095.0
 offset_bottom = 4525.0
 rotation = -1.57079
 texture = SubResource("GradientTexture2D_63yl8")
+metadata/_edit_lock_ = true
 
 [node name="Puerta1" parent="." instance=ExtResource("11_63yl8")]
 position = Vector2(4708, 298)
