@@ -21,6 +21,7 @@ func todo_listo():
 	score_label.get_keys_in_this_level()
 	
 func _se_agarro_una_llave():
+	print("LEVEL MANAGER LLAVE")
 	score_label._activate_key()
 	puerta_1.update_label(keys_found, keys_to_find)
 	update_keys_count()

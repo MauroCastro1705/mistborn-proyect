@@ -37,7 +37,7 @@ tile_map_data = PackedByteArray("AAAsACoAAAAKABAAAAAsACkAAAAJAA8AAAAsACgAAAAJAA8
 tile_set = ExtResource("3_xp713")
 
 [node name="Char1" parent="." instance=ExtResource("4_e7ej2")]
-position = Vector2(46, 556)
+position = Vector2(4446, 460)
 
 [node name="ScoreLabel" parent="Char1" instance=ExtResource("13_0qo1f")]
 unique_name_in_owner = true
@@ -243,7 +243,7 @@ position = Vector2(4910, 303)
 position = Vector2(1926, 696)
 
 [node name="Llave3" parent="." instance=ExtResource("10_wubmf")]
-position = Vector2(4395, -565)
+position = Vector2(4554, 463)
 
 [node name="fade" type="TextureRect" parent="."]
 offset_left = -1142.0
