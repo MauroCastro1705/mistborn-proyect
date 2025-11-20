@@ -328,10 +328,10 @@ offset_top = -44.0
 offset_bottom = -44.0
 
 [node name="ScoreLabel" parent="." instance=ExtResource("8_7xlo5")]
-offset_left = -313.0
-offset_top = -232.0
-offset_right = -313.0
-offset_bottom = -232.0
+offset_left = -318.0
+offset_top = -240.0
+offset_right = -318.0
+offset_bottom = -240.0
 
 [node name="pick_up_efect" type="TextureRect" parent="."]
 modulate = Color(1, 1, 1, 0)

@@ -13,7 +13,7 @@ func _on_body_entered(body: Node2D) -> void:
 		unlock()
 
 func unlock():
-	Global.emit_signal("door_unlocked")
+	Global.emit_signal("key_grabbed")
 	print("se agarro llave")
 	queue_free()
 	

@@ -1,0 +1,88 @@
+[gd_scene load_steps=7 format=3 uid="uid://ca41y5q73t00c"]
+
+[ext_resource type="Script" uid="uid://dpkrl2b6qwbn3" path="res://Escenas/menu/menu.gd" id="1_y1o0p"]
+[ext_resource type="FontFile" uid="uid://diwc5lumbgkvi" path="res://assets/fonts/BebasNeue-Regular.ttf" id="2_g4iwb"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_6yuiv"]
+font = ExtResource("2_g4iwb")
+font_size = 40
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_m1spm"]
+texture_margin_left = 10.0
+texture_margin_top = 5.0
+texture_margin_right = 10.0
+texture_margin_bottom = 5.0
+region_rect = Rect2(99, 3, 90, 25)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_bx5ov"]
+texture_margin_left = 10.0
+texture_margin_top = 5.0
+texture_margin_right = 10.0
+texture_margin_bottom = 5.0
+region_rect = Rect2(2, 2, 90, 26.9763)
+modulate_color = Color(0.985281, 0.985281, 0.985281, 1)
+
+[sub_resource type="Theme" id="Theme_t0a87"]
+Button/font_sizes/font_size = 19
+Button/fonts/font = null
+Button/styles/hover = SubResource("StyleBoxTexture_m1spm")
+Button/styles/normal = SubResource("StyleBoxTexture_bx5ov")
+
+[node name="Menu" type="Node2D"]
+script = ExtResource("1_y1o0p")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+color = Color(0.162066, 0.162066, 0.162066, 1)
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_left = 266.0
+offset_top = 212.0
+offset_right = 515.0
+offset_bottom = 260.0
+theme_override_font_sizes/font_size = 30
+text = "Mistborn proyect"
+label_settings = SubResource("LabelSettings_6yuiv")
+
+[node name="play" type="Button" parent="CanvasLayer"]
+offset_left = 314.0
+offset_top = 304.0
+offset_right = 445.0
+offset_bottom = 365.0
+theme = SubResource("Theme_t0a87")
+text = "JUGAR"
+
+[node name="exit" type="Button" parent="CanvasLayer"]
+offset_left = 571.0
+offset_top = 512.0
+offset_right = 664.0
+offset_bottom = 560.0
+text = "SALIR"
+
+[node name="version" type="Label" parent="CanvasLayer"]
+offset_left = 697.0
+offset_top = 575.0
+offset_right = 756.0
+offset_bottom = 598.0
+text = "Version"
+
+[node name="creditos" type="Button" parent="CanvasLayer"]
+offset_left = 74.0
+offset_top = 508.0
+offset_right = 185.0
+offset_bottom = 551.0
+text = "Creditos"
+
+[connection signal="pressed" from="CanvasLayer/play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="CanvasLayer/exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="CanvasLayer/creditos" to="." method="_on_creditos_pressed"]

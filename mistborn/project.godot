@@ -11,10 +11,11 @@ config_version=5
 [application]
 
 config/name="mistborn_proyect"
+config/version="0.0.4"
 config/tags=PackedStringArray("prototipo")
-run/main_scene="uid://bui7akuu45ous"
+run/main_scene="uid://ca41y5q73t00c"
 config/features=PackedStringArray("4.4", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="uid://b5sgwicx66c2b"
 
 [autoload]
 
@@ -33,6 +34,7 @@ enabled=PackedStringArray("res://addons/Todo_Manager/plugin.cfg", "res://addons/
 [file_customization]
 
 folder_colors={
+"res://Escenas/": "purple",
 "res://assets/": "yellow",
 "res://componentes/": "green",
 "res://scripts_generales/": "yellow"

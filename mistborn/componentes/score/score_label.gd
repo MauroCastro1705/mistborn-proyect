@@ -8,11 +8,11 @@ extends Control
 @onready var key_2: TextureRect = %key_2
 
 var keys_in_this_level: Array = []
-@onready var keys_found:int = 0
+
 
 func _ready() -> void:
 	Global.score_update.connect(_update_label)
-	Global.door_unlocked.connect(_activate_key)
+	Global.key_grabbed.connect(_activate_key)
 	_update_label()
 	get_keys_in_this_level()
 	what_keys_to_show()
@@ -29,10 +29,10 @@ func turn_keys_to_black(keys: Array):
 
 
 
-func _activate_key():
+func _activate_key(): #cuando "key_grabbed"
 	var key_to_operate = keys_in_this_level[0]
 	turn_key_to_normal(key_to_operate)
-	print("key to remove", key_to_operate)
+	print("key to remove: ", key_to_operate)
 	keys_in_this_level.erase(key_to_operate)
 	print(keys_in_this_level)
 	
