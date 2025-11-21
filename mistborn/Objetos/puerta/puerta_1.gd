@@ -1,13 +1,18 @@
 extends Node2D
+##puerta del nivel
+##metodos : door_opened:bool, update_label(int, int) y open_door()
 @onready var label: Label = $Label
+var door_opened := false
+@onready var puerta: StaticBody2D = $puerta
 
-@onready var collision_shape_2d: CollisionShape2D = $StaticBody2D/CollisionShape2D
 
 func _ready() -> void:
-	collision_shape_2d.disabled = false
-
+	pass
+	
 func update_label(found:int, to_find:int):
 	label.text = str(found) + " / " + str(to_find)
+	print("door label updated")
 
 func open_door():
-	collision_shape_2d.disabled = true
+	door_opened = true
+	self.queue_free()

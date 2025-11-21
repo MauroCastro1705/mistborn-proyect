@@ -11,6 +11,7 @@ extends Node
 @onready var keys_found:int = 0
 @onready var keys_to_find:int = Global.keys_in_lvl_1
 
+
 func _ready():
 	llave_1.key_agarrada.connect(_se_agarro_una_llave)
 	llave_3.key_agarrada.connect(_se_agarro_una_llave)
@@ -23,11 +24,16 @@ func todo_listo():
 func _se_agarro_una_llave():
 	print("LEVEL MANAGER LLAVE")
 	score_label._activate_key()
-	puerta_1.update_label(keys_found, keys_to_find)
 	update_keys_count()
+	puerta_1.update_label(keys_found, keys_to_find)
 	
+	
+
+
 func update_keys_count():
 	if keys_found < keys_to_find:
 		keys_found += 1
-	elif keys_found == keys_to_find:
+
+	if not puerta_1.door_opened and keys_found == keys_to_find:
 		puerta_1.open_door()
+		puerta_1.door_opened = true
