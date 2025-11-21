@@ -1,10 +1,55 @@
-[gd_scene load_steps=6 format=3 uid="uid://r8tvmgs5ws3t"]
+[gd_scene load_steps=11 format=3 uid="uid://r8tvmgs5ws3t"]
 
 [ext_resource type="Script" uid="uid://ctgw08ssc2crg" path="res://Escenas/creditos/creditos.gd" id="1_44uyq"]
 [ext_resource type="Texture2D" uid="uid://bsi2ekrn8uld0" path="res://assets/1x/fondo22.png" id="2_0voiy"]
 [ext_resource type="Texture2D" uid="uid://m64rweciistn" path="res://assets/1x/1Recurso 1.png" id="3_0kg3o"]
 [ext_resource type="Theme" uid="uid://cy120vivsan5a" path="res://recursos/boton_normal.tres" id="4_0kg3o"]
 [ext_resource type="LabelSettings" uid="uid://ce83mgiteokxx" path="res://assets/themes/texto_basico.tres" id="5_2qphm"]
+[ext_resource type="FontFile" uid="uid://diwc5lumbgkvi" path="res://assets/fonts/BebasNeue-Regular.ttf" id="6_i08qy"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_akujy"]
+font = ExtResource("6_i08qy")
+font_size = 30
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_i08qy"]
+resource_name = "new_animation"
+length = 30.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("fondo:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 30),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 305), Vector2(0, -216)]
+}
+
+[sub_resource type="Animation" id="Animation_akujy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("fondo:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -216)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ili1s"]
+_data = {
+&"RESET": SubResource("Animation_akujy"),
+&"new_animation": SubResource("Animation_i08qy")
+}
 
 [node name="Creditos" type="Node2D"]
 script = ExtResource("1_44uyq")
@@ -15,6 +60,7 @@ offset_bottom = 602.0
 color = Color(0.118581, 0.118581, 0.118581, 1)
 
 [node name="fondo" type="Node2D" parent="."]
+position = Vector2(0, -216)
 
 [node name="Fondo22" type="Sprite2D" parent="fondo"]
 modulate = Color(0.498848, 0.505511, 0.619094, 1)
@@ -30,7 +76,7 @@ texture = ExtResource("3_0kg3o")
 
 [node name="Fondo23" type="Sprite2D" parent="fondo"]
 modulate = Color(0.498848, 0.505511, 0.619094, 1)
-position = Vector2(514.002, -22.1729)
+position = Vector2(514.002, 129)
 rotation = -1.57079
 scale = Vector2(0.314896, 0.314896)
 texture = ExtResource("2_0voiy")
@@ -54,5 +100,20 @@ offset_top = 197.0
 offset_right = 481.0
 offset_bottom = 246.0
 text = "Diseño y Programacion
-Mauro Castro"
+"
 label_settings = ExtResource("5_2qphm")
+
+[node name="Label2" type="Label" parent="."]
+offset_left = 302.0
+offset_top = 202.0
+offset_right = 605.0
+offset_bottom = 301.0
+text = "
+Mauro Castro"
+label_settings = SubResource("LabelSettings_akujy")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_ili1s")
+}
+autoplay = "new_animation"
