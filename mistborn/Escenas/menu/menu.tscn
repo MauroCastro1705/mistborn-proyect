@@ -1,7 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://ca41y5q73t00c"]
+[gd_scene load_steps=12 format=3 uid="uid://ca41y5q73t00c"]
 
 [ext_resource type="Script" uid="uid://dpkrl2b6qwbn3" path="res://Escenas/menu/menu.gd" id="1_y1o0p"]
+[ext_resource type="Texture2D" uid="uid://bsi2ekrn8uld0" path="res://assets/1x/fondo22.png" id="2_ckcxl"]
 [ext_resource type="FontFile" uid="uid://diwc5lumbgkvi" path="res://assets/fonts/BebasNeue-Regular.ttf" id="2_g4iwb"]
+[ext_resource type="Texture2D" uid="uid://m64rweciistn" path="res://assets/1x/1Recurso 1.png" id="3_gm05d"]
+[ext_resource type="Texture2D" uid="uid://b5sgwicx66c2b" path="res://assets/mistborn_logo.png" id="4_rf38j"]
+[ext_resource type="Theme" uid="uid://ciauxi6kcbsr6" path="res://recursos/jugar_boton.tres" id="5_gm05d"]
+[ext_resource type="Theme" uid="uid://cy120vivsan5a" path="res://recursos/boton_normal.tres" id="6_6nl1o"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_6yuiv"]
 font = ExtResource("2_g4iwb")
@@ -9,26 +14,91 @@ font_size = 40
 outline_size = 2
 outline_color = Color(0, 0, 0, 1)
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_m1spm"]
-texture_margin_left = 10.0
-texture_margin_top = 5.0
-texture_margin_right = 10.0
-texture_margin_bottom = 5.0
-region_rect = Rect2(99, 3, 90, 25)
+[sub_resource type="Animation" id="Animation_6nl1o"]
+resource_name = "menu"
+length = 30.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/Fondo22:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 29.5333),
+"transitions": PackedFloat32Array(0.594604, 1),
+"update": 0,
+"values": [Vector2(284, 213), Vector2(500, 213)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/1Recurso1:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 29.5333),
+"transitions": PackedFloat32Array(1.10957, 0.732043),
+"update": 0,
+"values": [Vector2(395, 290), Vector2(800, 290)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CanvasLayer/MistbornLogo:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 29.8109),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.28319]
+}
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_bx5ov"]
-texture_margin_left = 10.0
-texture_margin_top = 5.0
-texture_margin_right = 10.0
-texture_margin_bottom = 5.0
-region_rect = Rect2(2, 2, 90, 26.9763)
-modulate_color = Color(0.985281, 0.985281, 0.985281, 1)
+[sub_resource type="Animation" id="Animation_rf38j"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/Fondo22:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(357, 213)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/1Recurso1:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(395, 290)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CanvasLayer/MistbornLogo:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
 
-[sub_resource type="Theme" id="Theme_t0a87"]
-Button/font_sizes/font_size = 19
-Button/fonts/font = null
-Button/styles/hover = SubResource("StyleBoxTexture_m1spm")
-Button/styles/normal = SubResource("StyleBoxTexture_bx5ov")
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ooc3f"]
+_data = {
+&"RESET": SubResource("Animation_rf38j"),
+&"menu": SubResource("Animation_6nl1o")
+}
 
 [node name="Menu" type="Node2D"]
 script = ExtResource("1_y1o0p")
@@ -45,6 +115,22 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 color = Color(0.162066, 0.162066, 0.162066, 1)
 
+[node name="Fondo22" type="Sprite2D" parent="CanvasLayer"]
+modulate = Color(0.498848, 0.505511, 0.619094, 1)
+position = Vector2(357, 213)
+scale = Vector2(0.314896, 0.314896)
+texture = ExtResource("2_ckcxl")
+
+[node name="1Recurso1" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(395, 290)
+texture = ExtResource("3_gm05d")
+
+[node name="MistbornLogo" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(196, 131)
+scale = Vector2(0.36, 0.36)
+texture = ExtResource("4_rf38j")
+offset = Vector2(63.8889, 152.778)
+
 [node name="Label" type="Label" parent="CanvasLayer"]
 offset_left = 266.0
 offset_top = 212.0
@@ -56,10 +142,10 @@ label_settings = SubResource("LabelSettings_6yuiv")
 
 [node name="play" type="Button" parent="CanvasLayer"]
 offset_left = 314.0
-offset_top = 304.0
+offset_top = 343.0
 offset_right = 445.0
-offset_bottom = 365.0
-theme = SubResource("Theme_t0a87")
+offset_bottom = 404.0
+theme = ExtResource("5_gm05d")
 text = "JUGAR"
 
 [node name="exit" type="Button" parent="CanvasLayer"]
@@ -67,13 +153,14 @@ offset_left = 571.0
 offset_top = 512.0
 offset_right = 664.0
 offset_bottom = 560.0
+theme = ExtResource("6_6nl1o")
 text = "SALIR"
 
 [node name="version" type="Label" parent="CanvasLayer"]
-offset_left = 697.0
-offset_top = 575.0
-offset_right = 756.0
-offset_bottom = 598.0
+offset_left = 669.0
+offset_top = 573.0
+offset_right = 728.0
+offset_bottom = 596.0
 text = "Version"
 
 [node name="creditos" type="Button" parent="CanvasLayer"]
@@ -81,7 +168,14 @@ offset_left = 74.0
 offset_top = 508.0
 offset_right = 185.0
 offset_bottom = 551.0
+theme = ExtResource("6_6nl1o")
 text = "Creditos"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_ooc3f")
+}
+autoplay = "menu"
 
 [connection signal="pressed" from="CanvasLayer/play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="CanvasLayer/exit" to="." method="_on_exit_pressed"]

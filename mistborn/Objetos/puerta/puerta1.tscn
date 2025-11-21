@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://w6k0sepxynj0"]
+[gd_scene load_steps=6 format=3 uid="uid://w6k0sepxynj0"]
 
 [ext_resource type="FontFile" uid="uid://diwc5lumbgkvi" path="res://assets/fonts/BebasNeue-Regular.ttf" id="1_0w7ay"]
 [ext_resource type="Script" uid="uid://dgfoplbqphjqh" path="res://Objetos/puerta/puerta_1.gd" id="1_yirce"]
@@ -8,6 +8,14 @@ line_spacing = -3.0
 paragraph_spacing = -3.0
 font = ExtResource("1_0w7ay")
 font_size = 32
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_37q7g"]
+line_spacing = -3.0
+paragraph_spacing = -3.0
+font = ExtResource("1_0w7ay")
+font_size = 19
 outline_size = 2
 outline_color = Color(0, 0, 0, 1)
 
@@ -47,13 +55,26 @@ offset_bottom = 98.0
 color = Color(0, 0, 0, 1)
 
 [node name="Label" type="Label" parent="."]
-offset_left = 5.0
-offset_top = 19.0
-offset_right = 43.0
-offset_bottom = 66.0
+offset_left = 3.0
+offset_top = 27.0
+offset_right = 67.0
+offset_bottom = 74.0
 scale = Vector2(0.5, 0.5)
 text = "caca"
 label_settings = SubResource("LabelSettings_yirce")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="."]
+offset_left = 1.0
+offset_top = 6.0
+offset_right = 74.0
+offset_bottom = 53.0
+scale = Vector2(0.5, 0.5)
+text = "Llaves"
+label_settings = SubResource("LabelSettings_37q7g")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="puerta" type="StaticBody2D" parent="."]
 collision_mask = 2

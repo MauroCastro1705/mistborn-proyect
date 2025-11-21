@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://dqp4r03jf05tp"]
+
+[ext_resource type="Script" uid="uid://6otr3uq6uvs0" path="res://Personaje/mouse/mouse_picker.gd" id="1_7pwj2"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_63sxc"]
+radius = 7.07107
+
+[node name="MousePicker" type="Area2D"]
+collision_layer = 2
+collision_mask = 16
+script = ExtResource("1_7pwj2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_63sxc")
+debug_color = Color(0.879941, 0.278008, 0.501177, 0.42)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

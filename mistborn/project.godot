@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="mistborn_proyect"
-config/version="0.0.4"
+config/version="0.0.5"
 config/tags=PackedStringArray("prototipo")
 run/main_scene="uid://ca41y5q73t00c"
 config/features=PackedStringArray("4.4", "Forward Plus")

@@ -29,11 +29,17 @@ func _ready() -> void:
 	_clear_line_points()
 	ui_controls.hide()
 	Global.score_update.connect(_flash_effect)
+	_conectar_signals_sensor()
 	
-func _clear_line_points():
+func _clear_line_points() -> void:
 	line.visible = false
 	line.clear_points()
 	
+func _conectar_signals_sensor() -> void:
+	sensor_metales.target_changed.connect(_on_target_changed)
+	sensor_metales.metal_target.connect(_on_metal_target)
+	sensor_metales.caja_target.connect(_on_caja_target)	
+
 func _process(_delta: float) -> void:
 	if mostrar_sensor_debug:
 		queue_redraw()
@@ -71,13 +77,14 @@ func salto_desde_el_piso(delta):
 		velocity.x = move_toward(velocity.x, 0.0, dash.friction * delta * 0.25)
 		
 func caida_estando_en_aire(delta):
-	if velocity.y > 0.0:
+	if velocity.y > 0.0: #caemos
 		velocity.y += gravity * fast_fall_multiplier * delta
 	else:
-		velocity.y += gravity * delta
-	if velocity.y > max_fall_speed:
+		velocity.y += gravity * delta 
+
+	if velocity.y > max_fall_speed:#normalizamos velocidad
 		velocity.y = max_fall_speed
-		
+
 func _movimiento_normal(delta):
 	# Movimiento normal con aceleración progresiva
 	var input_direction := Input.get_axis("left", "right")
@@ -157,28 +164,24 @@ func _stop_dash() -> void:
 	dash.post_dash_timer = dash.post_dash_cooldown
 
 # Señales del sensor de metales (Area2D)
-func _on_sensor_metales_body_entered(body: Node2D) -> void:
-	ui_controls.show()
-	if body.is_in_group("metal"):
-		_entro_metal(body)
+func _on_target_changed(new_target: Node2D, prev: Node2D) -> void:
+	if new_target == null:
+		_salio_metal(prev)#limpiar referencia
+		ui_controls.hide()
+		dash.es_liviano = false
+	else:
+		_entro_metal(new_target)
+		ui_controls.show()
 
-	if body.is_in_group("cajas"):
-		_entro_caja(body)
+func _on_metal_target(body: Node2D) -> void:
+	_entro_metal(body)
+
+func _on_caja_target(body: Node2D) -> void:
+	_entro_caja(body)
+	# Wake rigid bodies safely
+	if "sleeping" in body:
 		body.sleeping = false
-		if body.is_in_group("liviano"):
-			dash.es_liviano = true
-			print("es liviano" , body)
-
-func _on_sensor_metales_body_exited(body: Node2D) -> void:
-	ui_controls.hide()
-	if body == metal_body:
-		_salio_metal(body)
-		if body.is_in_group("pesado"):
-			dash.es_pesado = false
-	if body == metal_box:
-		metal_box = null
-		if body.is_in_group("liviano"):
-			dash.es_liviano = false
+	dash.es_liviano = body.is_in_group("liviano")
 
 func _entro_metal(body):
 	dash.can_dash = true

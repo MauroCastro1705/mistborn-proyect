@@ -1,11 +1,12 @@
-[gd_scene load_steps=45 format=3 uid="uid://dmqbb6wammm5p"]
+[gd_scene load_steps=46 format=3 uid="uid://dmqbb6wammm5p"]
 
 [ext_resource type="Script" uid="uid://b54b4cnjaj5xm" path="res://Personaje/char_1.gd" id="1_ngd07"]
 [ext_resource type="Resource" uid="uid://d17pufvmak2l0" path="res://Personaje/dash_resource.tres" id="2_ghlw4"]
 [ext_resource type="Texture2D" uid="uid://cr8518k4du5qc" path="res://assets/character/120x80_PNGSheets/_Fall.png" id="2_wivtg"]
 [ext_resource type="Texture2D" uid="uid://bam24eio71ow6" path="res://assets/character/120x80_PNGSheets/_Idle.png" id="3_sf0id"]
-[ext_resource type="PackedScene" uid="uid://bki76vtooytev" path="res://sensor_metales.tscn" id="3_vb5fy"]
+[ext_resource type="PackedScene" uid="uid://bki76vtooytev" path="res://Personaje/sensor_metales/sensor_metales.tscn" id="3_vb5fy"]
 [ext_resource type="Texture2D" uid="uid://dua8rxw4ty6r3" path="res://assets/character/120x80_PNGSheets/_Jump.png" id="4_7xlo5"]
+[ext_resource type="PackedScene" uid="uid://dqp4r03jf05tp" path="res://Personaje/mouse/MousePicker.tscn" id="4_vb5fy"]
 [ext_resource type="Texture2D" uid="uid://6kitapgyksma" path="res://assets/character/120x80_PNGSheets/_JumpFallInbetween.png" id="5_ghlw4"]
 [ext_resource type="Texture2D" uid="uid://cjkkd6xt4pak" path="res://assets/character/120x80_PNGSheets/_Run.png" id="6_vb5fy"]
 [ext_resource type="PackedScene" uid="uid://txoaewemsjrd" path="res://componentes/ui/ui_controls.tscn" id="7_sf0id"]
@@ -297,6 +298,9 @@ shape = SubResource("CapsuleShape2D_mayg1")
 
 [node name="sensor_metales" parent="." instance=ExtResource("3_vb5fy")]
 unique_name_in_owner = true
+mouse_picker_path = NodePath("../MousePicker")
+
+[node name="MousePicker" parent="." instance=ExtResource("4_vb5fy")]
 
 [node name="Line2D" type="Line2D" parent="."]
 visible = false
@@ -332,6 +336,3 @@ texture = SubResource("GradientTexture2D_ghlw4")
 libraries = {
 &"": SubResource("AnimationLibrary_vb5fy")
 }
-
-[connection signal="body_entered" from="sensor_metales" to="." method="_on_sensor_metales_body_entered"]
-[connection signal="body_exited" from="sensor_metales" to="." method="_on_sensor_metales_body_exited"]
