@@ -1,13 +1,61 @@
-[gd_scene load_steps=4 format=3 uid="uid://clo821p6frorj"]
+[gd_scene load_steps=13 format=3 uid="uid://clo821p6frorj"]
 
 [ext_resource type="Script" uid="uid://2mqxbdypr08l" path="res://Escenas/win_level/win_level.gd" id="1_qledo"]
 [ext_resource type="FontFile" uid="uid://diwc5lumbgkvi" path="res://assets/fonts/BebasNeue-Regular.ttf" id="1_qnyqo"]
+[ext_resource type="Theme" uid="uid://ciauxi6kcbsr6" path="res://recursos/jugar_boton.tres" id="3_wajil"]
+[ext_resource type="Texture2D" uid="uid://bsi2ekrn8uld0" path="res://assets/1x/fondo22.png" id="4_vtfbd"]
+[ext_resource type="Texture2D" uid="uid://m64rweciistn" path="res://assets/1x/1Recurso 1.png" id="5_ficlj"]
+[ext_resource type="Texture2D" uid="uid://b5sgwicx66c2b" path="res://assets/mistborn_logo.png" id="6_1mcfj"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_qledo"]
+[sub_resource type="Gradient" id="Gradient_vtfbd"]
+colors = PackedColorArray(0.0562916, 0.0562916, 0.0562916, 1, 0.476785, 0.477113, 0.549589, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ficlj"]
+gradient = SubResource("Gradient_vtfbd")
+
+[sub_resource type="LabelSettings" id="LabelSettings_vtfbd"]
 font = ExtResource("1_qnyqo")
-font_size = 40
+font_size = 80
 outline_size = 2
 outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_vtfbd"]
+resource_name = "new_animation"
+length = 30.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/MistbornLogo:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 29.9737),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.28319]
+}
+
+[sub_resource type="Animation" id="Animation_ficlj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/MistbornLogo:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [6.28319]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1mcfj"]
+_data = {
+&"RESET": SubResource("Animation_ficlj"),
+&"new_animation": SubResource("Animation_vtfbd")
+}
 
 [node name="WinLevel" type="Node2D"]
 script = ExtResource("1_qledo")
@@ -22,19 +70,56 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.0885599, 0.0885599, 0.0885599, 1)
 
+[node name="ColorRect2" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 847.0
+offset_top = -125.0
+offset_right = 777.0
+offset_bottom = 130.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 1.57079
+texture = SubResource("GradientTexture1D_ficlj")
+
+[node name="Fondo22" type="Sprite2D" parent="CanvasLayer"]
+modulate = Color(0.498848, 0.505511, 0.619094, 1)
+position = Vector2(262, 223)
+scale = Vector2(0.314896, 0.314896)
+texture = ExtResource("4_vtfbd")
+
+[node name="1Recurso1" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(395, 290)
+texture = ExtResource("5_ficlj")
+
+[node name="MistbornLogo" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(658, 135)
+rotation = 6.28319
+scale = Vector2(0.36, 0.36)
+texture = ExtResource("6_1mcfj")
+offset = Vector2(63.8889, 152.778)
+
 [node name="Label" type="Label" parent="CanvasLayer"]
-offset_left = 283.0
-offset_top = 211.0
-offset_right = 515.0
-offset_bottom = 259.0
+offset_left = 4.0
+offset_top = 265.0
+offset_right = 469.0
+offset_bottom = 361.0
 text = "Nivel completado"
-label_settings = SubResource("LabelSettings_qledo")
+label_settings = SubResource("LabelSettings_vtfbd")
 
 [node name="Button" type="Button" parent="CanvasLayer"]
-offset_left = 347.0
-offset_top = 375.0
-offset_right = 443.0
-offset_bottom = 406.0
+offset_left = 227.0
+offset_top = 384.0
+offset_right = 361.0
+offset_bottom = 423.0
+theme = ExtResource("3_wajil")
 text = "volver al menu"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_1mcfj")
+}
+autoplay = "new_animation"
 
 [connection signal="pressed" from="CanvasLayer/Button" to="." method="_on_button_pressed"]
