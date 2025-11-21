@@ -4,6 +4,6 @@
 
 [resource]
 font = ExtResource("1_tcca4")
-font_size = 20
+font_size = 40
 outline_size = 2
 outline_color = Color(0, 0, 0, 1)

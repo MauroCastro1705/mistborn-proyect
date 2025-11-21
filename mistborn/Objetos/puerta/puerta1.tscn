@@ -7,7 +7,7 @@
 line_spacing = -3.0
 paragraph_spacing = -3.0
 font = ExtResource("1_0w7ay")
-font_size = 17
+font_size = 32
 outline_size = 2
 outline_color = Color(0, 0, 0, 1)
 
@@ -51,6 +51,7 @@ offset_left = 5.0
 offset_top = 19.0
 offset_right = 43.0
 offset_bottom = 66.0
+scale = Vector2(0.5, 0.5)
 text = "caca"
 label_settings = SubResource("LabelSettings_yirce")
 
